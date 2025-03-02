@@ -14,3 +14,33 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.backgroundImg{
+  background-image: url("./Image/BG1.jpg");
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.insidediv{
+  width: 32rem !important;
+  height: 16rem !important;
+  
+}
+
+input {
+  background-color: #eee;
+  padding: 15px 10px;
+  border: none;
+  font-size: 16px;
+  border-radius: 10px 0 0 10px;
+}
+
+h1 {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  text-align: center;
+}

@@ -6,10 +6,11 @@ import axios from "axios";
 // }).catch((error) => {
 //   return error.data
 // })
-
+var jstatus=false;
 async function categorylist(){
   return(
   await axios.get("https://api.chucknorris.io/jokes/categories").then(function (data) {
+    jstatus = false;
     return data.data.join(',')
   }).catch((error) => {
     return error.data
@@ -19,17 +20,19 @@ async function categorylist(){
 const fetchJokes = createAsyncThunk("jokes/jokecategory", async function (category) {
   return axios.get(`https://api.chucknorris.io/jokes/random?category=${category}`).then(function (data) {
     console.log(data.data.value);
+    jstatus = true;
     return data.data.value
   }).catch(async function (error) {
     const list = await categorylist();
-      return error.response.data.error + error.response.data.path +list
+      return "Please check avalable categories: " + list
   })
 })
 const initialState = {
-  jokes: "Ready to Rofl"
+  jokes: ""
 }
 const jokeSlicer = createSlice(
   {
+   
     name: "Jokes",
     initialState,
     reducers: {
@@ -38,10 +41,13 @@ const jokeSlicer = createSlice(
         console.log("Loading....");
       }).addCase(fetchJokes.fulfilled, (state, action) => {
         state.jokes = action.payload;
+        state.jokesstatus = jstatus;
+        //state.loadstatus = jstatus;
       })
     }
 
   }
+  
 )
 export default jokeSlicer;
 export { fetchJokes } 
